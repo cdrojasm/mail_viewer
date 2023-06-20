@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  zincSearch:
+    image: "public.ecr.aws/zinclabs/zincsearch"
+    volumes:
+      - "/c/Users/crojas/Desktop/proyectos/tTest/zincSearch/data/:/data"
+    ports:
+      - "4080:4080"
+    environment:
+      - ZINC_FIRST_ADMIN_USER=admin
+      - ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
+  api:
+    build:
+      context: ./apiIndexContent
+    volumes:
+      - "/c/Users/crojas/Desktop/proyectos/tTest/apiIndexContent/:/app"
+    ports:
+      - "7000:3000"
+  app:
+    build:
+      context: ./email_front_end
+    image:  "email_app_vue_js"
+    volumes:
+      - "/c/Users/crojas/Desktop/proyectos/tTest/email_front_end:/app"
+    ports:
+      - "5010:8080"
+    
+    

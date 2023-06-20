@@ -1,0 +1,8 @@
+zincSearch/
+enron_mail_/
+enronData/
+node_modules/
+.vs_code/
+.gitignore/
+.git/
+listOfDocuments.csv

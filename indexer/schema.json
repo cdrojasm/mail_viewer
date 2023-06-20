@@ -1,0 +1,98 @@
+{
+    "name": "enron_mail__",
+    "storage_type": "disk",
+    "shard_num": 3,
+    "mappings": {
+        "properties": {
+            "Message_ID": {
+                "type": "keyword",
+                "index": true,
+                "store": true,
+                "aggregatable":false
+            },
+            "Date": {
+                "type": "date",
+                "index": true,
+                "store": true,
+                "format": "2006-01-02T15:04:05Z07:00",
+                "sortable": true,
+                "aggregatable": true
+            },
+            "From": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "To": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "cc": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "Subject": {
+                "type": "text",
+                "index": true,
+                "store": true,
+                "highlightable": true
+            },
+            "Mime_version": {
+                "type": "numeric",
+                "store": true
+            },
+            "content_Type": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "content_Transfer_Encoding": {
+                "type": "text",
+                "store": true
+            },
+            "X_from": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "X_to": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "X_cc": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "X_bcc": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "X_folder": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "X_origin": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "X_filename": {
+                "type": "text",
+                "index": true,
+                "store": true
+            },
+            "Content": {
+                "type": "text",
+                "index": true,
+                "store": true,
+                "highlightable":true
+            }
+        }
+    }
+}
