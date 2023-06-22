@@ -1,6 +1,6 @@
 <script>
-import Email_list from './emai_list.vue'
-import Email_viewer from "./email_viewer.vue"
+import Email_list from './Email_list.vue'
+import Email_viewer from "./Email_viewer.vue"
 export default{
     props:{
         queryMatch:{
@@ -14,20 +14,21 @@ export default{
         enableSearch:{
             type:Boolean, 
             required: true
+        },
+        handleEnableSearch:{
+            type:Function,
+            required: true
         }
     },
-    data(){
-        return{
-            selectedMail:""
-        }
+    components:{
+        Email_list, 
+        Email_viewer
     }
 }
 </script>
 <template>
-    <div id="container_Email_list_viewer" class="">
-        
+    <div id="container_Email_list_viewer" class="w-full">
+        <Email_list :queryResults="queryResults"/>
+        <Email_viewer/>
     </div>
 </template>
-<style>
-
-</style>
