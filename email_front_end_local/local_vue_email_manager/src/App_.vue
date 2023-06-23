@@ -50,7 +50,7 @@ onMounted(() => {
     <Search_bar :queryMatch="queryMatch" :setQueryMatch="setQueryMatch" :enableSearch="enableSearch"
       :handleEnableSearch="handleEnableSearch" />
   </header>
-  <main>
+  <main class="w-5/6">
     <Email_list_viewer_main :queryResults="queryResults" queryMatch="queryMatch" :enableSearch="enableSearch"
       :handleEnableSearch="handleEnableSearch" />
   </main>

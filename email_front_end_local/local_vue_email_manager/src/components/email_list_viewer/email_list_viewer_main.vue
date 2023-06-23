@@ -23,6 +23,18 @@ export default{
     components:{
         Email_list, 
         Email_viewer
+    },watch:{
+        queryResults(newQueryResults, oldQueryResults){
+            if(newQueryResults.value.hasOwnProperty("length") && newQueryResults.value.length > 0 ){
+                this.amountDocuments = newQueryResults.value.length;
+            }
+            console.log("amount documents")
+            console.log(newQueryResults.value.length)
+        }
+    },data(){
+        return{
+            amountDocuments: 0
+        }
     }
 }
 </script>

@@ -14,10 +14,12 @@ export default{
 }
 </script>
 <template >
-    
-    <div id="container_list_element" v-for="document in queryResults">
-        <Email_list_element :document="document"/>
+    <div class="divide-y-2 divide-dashed w-full" >
+        <div class="w-full h-8 flex flex-row justify-center content-center" v-for="document in queryResults">
+            <Email_list_element :document="document"/>
+        </div>
     </div>
+    
 </template>
 <style>
 
