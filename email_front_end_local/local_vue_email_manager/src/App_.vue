@@ -19,13 +19,14 @@ function handleEnableSearch(boolValueEnableSearch) {
 
 watch(enableSearch, (newValue, oldValue) => {
   console.log("consultando data")
-  fetch('http://localhost:7000/documents/?DocumentID=&page=0&amountDocs=20', {
+  fetch(`http://localhost:7000/documents/?documentID=${queryMatch.value}&page=0&amountDocs=20`, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json'
     }
   }).then(response => response.json())
     .then(data => {
+      queryResults.value.splice(0);
       data.documents.forEach((document_i) => {
         queryResults.value.push(document_i)
       })

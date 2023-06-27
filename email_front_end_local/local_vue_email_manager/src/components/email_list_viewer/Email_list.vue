@@ -6,6 +6,14 @@ export default{
         queryResults: {
             type: Array,
             required: true
+        },
+        selectDocToRender: {
+            type: Function,
+            required: true
+        },
+        setEnableEmailViewer: {
+            type: Function,
+            required: true
         }
     },
     components:{
@@ -15,12 +23,9 @@ export default{
 </script>
 <template >
     <div class="divide-y-2 divide-dashed w-full" >
-        <div class="w-full h-8 flex flex-row justify-center content-center" v-for="document in queryResults">
-            <Email_list_element :document="document"/>
+        <div class="w-full h-8 " v-for="document in queryResults">
+            <Email_list_element :document="document" :selectDocToRender="selectDocToRender" :setEnableEmailViewer="setEnableEmailViewer"/>
         </div>
     </div>
     
 </template>
-<style>
-
-</style>

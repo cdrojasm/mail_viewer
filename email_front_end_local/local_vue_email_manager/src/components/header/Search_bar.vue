@@ -39,6 +39,10 @@ export default{
         enableSearch:{
             type:Boolean, 
             required: true
+        },
+        handleEnableSearch:{
+            type:Function, 
+            required:true
         }
     },
     methods:{
@@ -56,7 +60,7 @@ export default{
         },
         makeSearch(){
             console.log("realizando busqueda")
-            this.handleEnableSearch = !this.enableSearch
+            this.handleEnableSearch(!this.enableSearch)
         },
         handlerCleanSearchBarInput(){
             this.setQueryMatch("")
