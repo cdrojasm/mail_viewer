@@ -1,6 +1,7 @@
 <script>
+import Email_viewer from './Email_viewer.vue'
 import Email_list from './Email_list.vue'
-import Email_viewer from "./Email_viewer.vue"
+
 export default {
     props: {
         queryMatch: {
@@ -18,11 +19,31 @@ export default {
         handleEnableSearch: {
             type: Function,
             required: true
+        },
+        currentOffSet: {
+            type: Number,
+            required: true
+        },
+        setCurrentOffSet: {
+            type: Function,
+            required: true
+        },
+        amountDocsPerPage: {
+            type: Number,
+            required: true
+        },
+        setCurrentAmountDocsPerPage: {
+            type: Function,
+            required: true
+        },
+        totalCount: {
+            type: Number,
+            required: true
         }
     },
     components: {
         Email_list,
-        Email_viewer
+        Email_viewer,
     }, watch: {
         queryResults(newQueryResults, oldQueryResults) {
             if (newQueryResults.value.hasOwnProperty("length") && newQueryResults.value.length > 0) {
@@ -54,8 +75,19 @@ export default {
 }
 </script>
 <template>
-    <div id="container_Email_list_viewer" class="w-full">
-        <Email_list :queryResults="queryResults" :selectDocToRender="selectDocToRender" :setEnableEmailViewer="setEnableEmailViewer"/>
-        <Email_viewer v-if="enableEmailViewer" :selectedDocumentToRender="selectedDocumentToRender" :setEnableEmailViewer="setEnableEmailViewer"/>
+    <div id="container_Email_list_viewer" class="w-full flex flex-row pt-6">
+        <Email_list 
+            :queryResults="queryResults" 
+            :selectDocToRender="selectDocToRender"
+            :setEnableEmailViewer="setEnableEmailViewer" 
+            :currentOffSet="currentOffSet" 
+            :setCurrentOffSet="setCurrentOffSet"
+            :amountDocsPerPage="amountDocsPerPage" 
+            :setCurrentAmountDocsPerPage="setCurrentAmountDocsPerPage" 
+            :totalCount="totalCount"
+            :enableSearch="enableSearch"
+            :handleEnableSearch="handleEnableSearch" />
+        <Email_viewer class="flex flex-col" v-if="enableEmailViewer" :selectedDocumentToRender="selectedDocumentToRender"
+            :setEnableEmailViewer="setEnableEmailViewer" />
     </div>
 </template>

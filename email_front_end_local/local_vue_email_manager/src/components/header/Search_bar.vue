@@ -43,16 +43,23 @@ export default{
         handleEnableSearch:{
             type:Function, 
             required:true
-        }
+        },
+        setCurrentOffSet:{
+            type:Function,
+            required:true
+        },
+        setCurrentAmountDocsPerPage:{
+            type:Function,
+            required:true
+        }   
     },
     methods:{
         handleInputMatchString(event){
             if(event.type==='keypress'){
-                if(event.key==="Enter"){
+                if(event.key==="Enter"){ 
                     this.makeSearch()
                 }
             }else{
-                //console.log("changing the value", event)
                 this.setQueryMatch(event.target.value)
                 this.inputData = event.target.value
             }
@@ -60,6 +67,7 @@ export default{
         },
         makeSearch(){
             console.log("realizando busqueda")
+            this.setCurrentOffSet(0);
             this.handleEnableSearch(!this.enableSearch)
         },
         handlerCleanSearchBarInput(){

@@ -1,7 +1,7 @@
 <script>
 export default {
     props: {
-        document: {
+        Doc: {
             type: Object,
             required: true
         },
@@ -16,19 +16,35 @@ export default {
 
     }, computed: {
         email_from() {
-            return this.document.From;
+            return this.Doc.From;
         },
         email_Subject_Highlight() {
-            if (this.document.Highlight === null || this.document.Highlight === undefined || this.document.Highlight === "") {
-                return this.document.Subject;
+            const MAX_AMOUNT_CHARACTERS = 125;
+            let originalContent = "";
+            if (this.Doc.Highlight === null || this.Doc.Highlight === undefined || this.Doc.Highlight === "") {
+                originalContent = this.Doc.Subject;
             } else {
-                this.document.Highlight;
+                originalContent = this.Doc.Highlight[0];
             }
+            if (originalContent === undefined || originalContent === null) { return "" }
+            return originalContent.length > MAX_AMOUNT_CHARACTERS
+                ? originalContent.substring(0, MAX_AMOUNT_CHARACTERS)
+                : originalContent;
         },
         date_email() {
-            if (this.document.hasOwnProperty("Date")) {
-                let stringDateToReturn = this.document.Date.split("T")[0].split("-").join("/");
+            if (this.Doc.hasOwnProperty("Date")) {
+                let stringDateToReturn = this.Doc.Date.split("T")[0].split("-").join("/");
                 return stringDateToReturn;
+            }
+        },
+        fromEmail() {
+            if(this.Doc.From=== undefined){
+                return "";
+            }
+            if (this.Doc.From.indexOf(",") !== -1) {
+                return this.Doc.From.split(",")[0];
+            } else {
+                return this.Doc.From;
             }
         }
     }, methods: {
@@ -53,10 +69,11 @@ export default {
 }
 </script>
 <template>
-    <div class="w-full flex flex-row justify-center content-center hover:border-solid hover:border hover:border-blue-950 cursor-pointer"
-        @click="handleSelectDocument($event, this.document)">
-        <span class="w-1/5">{{ this.document.From }}</span> <!-- 20% -->
-        <span class="w-4/6" v-html="email_Subject_Highlight"></span> <!-- 8.33% -->
-        <span class="w-1/12">{{ this.date_email }}</span> <!-- 8.33% -->
+    <div class="w-full h-full flex flex-col justify-center content-center " @click="handleSelectDocument($event, this.Doc)">
+        <div class="w-full flex flex-row justify-between">
+            <span class="w-1/5 text-xs font-bold">{{ fromEmail }}</span>
+            <span class="w-1/5 text-xs">{{ this.date_email }}</span> <!-- 8.33% -->
+        </div>
+        <span class="w-full text-sm" v-html="email_Subject_Highlight"></span> <!-- 8.33% -->
     </div>
 </template>
