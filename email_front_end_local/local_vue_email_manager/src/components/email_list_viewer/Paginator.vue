@@ -21,9 +21,10 @@ export default {
         totalCount: {
             type: Number,
             required: true
-        },enableSearch:{
-            type:Boolean, 
-            required:true
+        },
+        enableSearch: {
+            type: Boolean,
+            required: true
         },
         handleEnableSearch: {
             type: Function,
@@ -40,7 +41,7 @@ export default {
         handleGoToLastPage() {
             let ratio = Math.floor(this.totalCount / this.amountDocsPerPage)
             let newOffSet = ratio * this.amountDocsPerPage;
-            if(newOffSet < this.totalCount){
+            if (newOffSet <= this.totalCount) {
                 this.setCurrentOffSet(newOffSet)
                 this.handleEnableSearch(!this.enableSearch)
             }
@@ -54,34 +55,49 @@ export default {
         },
         handleGoToPreviousPage() {
             let newOffSet = this.currentOffSet - this.amountDocsPerPage;
-            if (newOffSet > 0) {
+            if (newOffSet >= 0) {
                 this.setCurrentOffSet(newOffSet);
                 this.handleEnableSearch(!this.enableSearch)
             }
+        },
+        handleChangeAmountOfDocsPerPage(evt){
+            let newAmountDocsPerPage = evt.target.value;
+            this.setCurrentAmountDocsPerPage(newAmountDocsPerPage)
+            this.handleEnableSearch(!this.enableSearch)
         }
 
     }, computed: {
         page() {
-            return Math.floor(this.currentOffSet / this.amountDocsPerPage)
+            return Math.floor(this.currentOffSet / this.amountDocsPerPage) + 1;
         }
     }
 }
 </script>
 <template>
-    <div class="w-52 h-8 fixed flex flex-row justify-end">
-        <div class="flex flex-row h-8">
+    <div class="w-52 h-8 fixed flex flex-row justify-end right-3/4 	">
+        <div class="flex flex-row h-8 shadow-2xl bg-slate-50 rounded-sm">
             <div class="h-8 w-8 font-bold border border-solid cursor-pointer" @click="handleGoToFirstPage"><span>{{ "<<"
             }}</span>
             </div>
             <div class="h-8 w-8 font-bold border border-solid cursor-pointer" @click="handleGoToPreviousPage"><span>{{ "<"
             }}</span>
             </div>
-            <div class="h-8 w-32"><span>{{ "page " + this.page + " -> " + this.currentOffSet + "/" +
+            <div class="h-8 w-40 text-sm"><span>{{ "page " + (this.page === 0 ? 1 : this.page) + " -> " + this.currentOffSet + "/" +
                 this.totalCount }}</span></div>
             <div class="h-8 w-8 font-bold border border-solid cursor-pointer" @click="handleGoToNextPage"><span>{{ ">"
-                    }}</span></div>
-        <div class="h-8 w-8 font-bold border border-solid cursor-pointer" @click="handleGoToLastPage"><span>{{ ">>"
-                }}</span></div>
+            }}</span></div>
+            <div class="h-8 w-8 font-bold border border-solid cursor-pointer" @click="handleGoToLastPage"><span>{{ ">>"
+            }}</span></div>
+            <div>
+                <select @change="handleChangeAmountOfDocsPerPage">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
 
+        </div>
     </div>
-</div></template>
+</template>

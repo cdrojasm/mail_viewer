@@ -21,11 +21,11 @@ function handleEnableSearch(boolValueEnableSearch) {
 }
 
 function setCurrentOffSet(newPage) {
-  currentOffSet.value = newPage;
+  currentOffSet.value = parseInt(newPage);
 }
 
 function setCurrentAmountDocsPerPage(newAmountDocs) {
-  amountDocsPerPage.value = newAmountDocs;
+  amountDocsPerPage.value = parseInt(newAmountDocs);
 }
 
 watch(enableSearch, (newValue, oldValue) => {
