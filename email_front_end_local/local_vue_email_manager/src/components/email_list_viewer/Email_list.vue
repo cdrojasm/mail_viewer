@@ -61,7 +61,7 @@ export default {
             :enableSearch="enableSearch"
             :handleEnableSearch="handleEnableSearch"/>
         <div class="w-full h-8"></div>
-        <div class="w-full h-20 text-sm hover:border-blue-950 cursor-pointer hover:border-solid hover:border"
+        <div class="w-full h-20 text-sm hover:border-blue-950 cursor-pointer hover:border-solid hover:border select-none"
             v-for="document in queryResults">
             <Email_list_element :Doc="document" :selectDocToRender="selectDocToRender"
                 :setEnableEmailViewer="setEnableEmailViewer" />

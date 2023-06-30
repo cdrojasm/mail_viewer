@@ -69,7 +69,7 @@ export default {
 }
 </script>
 <template>
-    <div class="w-full h-full flex flex-col justify-center content-center " @click="handleSelectDocument($event, this.Doc)">
+    <div class="w-full h-full flex flex-col justify-center content-center hover:bg-neutral-300" @click="handleSelectDocument($event, this.Doc)">
         <div class="w-full flex flex-row justify-between">
             <span class="w-1/5 text-xs font-bold">{{ fromEmail }}</span>
             <span class="w-1/5 text-xs">{{ this.date_email }}</span> <!-- 8.33% -->
