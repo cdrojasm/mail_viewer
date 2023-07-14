@@ -10,7 +10,7 @@ export default {
 }
 </script>
 <template>
-    <div class="h-4/6 w-8/12 pl-5">
+    <div class="h-full w-8/12 pl-5 shadow-inner shadow-xl bg-white p-1 rounded-lg">
         <div id="container_Email_viewer" class="text-xs">
             <div class="w-full h-16 text-3xl font-bold">
                 {{ this.selectedDocumentToRender.Subject }}
@@ -26,7 +26,8 @@ export default {
 }
 
 #container_Email_viewer {
-    max-height: 67vh;
+    max-height: 71vh;
+    min-height: 71vh;
     overflow-y: auto;
 }
 </style>

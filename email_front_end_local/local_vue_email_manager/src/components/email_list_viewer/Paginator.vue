@@ -74,24 +74,24 @@ export default {
 }
 </script>
 <template>
-    <div class="w-52 h-8 fixed flex flex-row justify-end right-3/4 	">
-        <div class="flex flex-row h-8 shadow-2xl bg-slate-50 rounded-sm select-none">
-            <div class="h-8 w-8 font-bold border border-solid cursor-pointer hover:bg-neutral-300 flex flex-row items-center justify-center"
+    <div class="h-8 flex flex-row justify-end w-full">
+        <div class="flex flex-row h-8 shadow-2xl bg-slate-50 rounded-sm select-none w-full justify-center">
+            <div class="h-8 w-8 font-bold border border-solid cursor-pointer hover:bg-neutral-300 flex flex-row items-center justify-center rounded-l-lg"
                 @click="handleGoToFirstPage"><span>{{ "<<" }}</span>
             </div>
             <div class="h-8 w-8 font-bold border border-solid cursor-pointer hover:bg-neutral-300 flex flex-row items-center justify-center"
                 @click="handleGoToPreviousPage"><span>{{ "<" }}</span>
             </div>
-            <div class="h-8 w-40 text-sm flex flex-row items-center justify-center"><span>{{ "page " + (this.page === 0 ? 1
-                : this.page) + " -> " + this.currentOffSet + "/" +
+            <div class="h-8 w-56 text-sm flex flex-row items-center justify-center font-bold border border-solid"><span>{{ "page " + (this.page === 0 ? 1
+                : this.page) + " -> " + (this.currentOffSet===0 ? 1 : this.currentOffSet) + "/" +
                 this.totalCount }}</span></div>
             <div class="h-8 w-8 font-bold border border-solid cursor-pointer hover:bg-neutral-300 flex flex-row items-center justify-center"
                 @click="handleGoToNextPage"><span>{{ ">"
                 }}</span></div>
-            <div class="h-8 w-8 font-bold border border-solid cursor-pointer hover:bg-neutral-300 flex flex-row items-center justify-center"
+            <div class="h-8 w-8 font-bold border border-solid cursor-pointer hover:bg-neutral-300 flex flex-row items-center justify-center rounded-r-lg"
                 @click="handleGoToLastPage"><span>{{ ">>"
                 }}</span></div>
-            <div class="h-8 w-12 flex flex-row items-center justify-center">
+            <div class="h-8 w-1/5 flex flex-row items-center justify-center">
                 <select @change="handleChangeAmountOfDocsPerPage">
                     <option value="5">5</option>
                     <option value="10">10</option>

@@ -1,18 +1,18 @@
 <template>
-    <div id="container_mail_search_bar" class="w-full flex flex-row items-center justify-center mb-1.5">
+    <div id="container_mail_search_bar" class="w-full flex flex-row items-center justify-center my-3.5">
         <div class="flex flex-row items-center justify-center w-9/12 ">
             <div class="rounded-md border border-zinc-400 hover:border-zinc-950 flex flex-row h-7">
                 <input id="search_input" v-model="inputData" class="w-full h-6 outline-none" @input="handleInputMatchString" @keypress="handleInputMatchString"
                     placeholder="search..." />
                 <div class="flex flex-row items-center justify-center w-1/12 h-7">
-                    <button @click="handlerCleanSearchBarInput">
+                    <button @click="handlerCleanSearchBarInput" class="w-6/12">
                         <i>
                             <img src="@/assets/times_icon.svg" />
                         </i>
                     </button>
-                    <button @click="makeSearch">
+                    <button @click="makeSearch" class="w-6/12">
                         <i>
-                            <img src="@/assets/search_icon.svg" />
+                            <img id="search_icon" src="@/assets/search_icon.svg" height="30" width="24"/>
                         </i>
                     </button>
                 </div>
@@ -20,6 +20,11 @@
         </div>
     </div>
 </template>        
+<style>
+#search_icon{
+    height: unset;
+}
+</style>
 <script>
 export default{
     data(){

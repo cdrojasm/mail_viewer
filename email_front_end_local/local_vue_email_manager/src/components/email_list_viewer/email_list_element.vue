@@ -12,9 +12,27 @@ export default {
         setEnableEmailViewer: {
             type: Function,
             required: true
+        },
+        selected:{
+            type: Number, 
+            required: true
+        },
+        setSelected:{
+            type: Function, 
+            required: true
+        },
+        index:{
+            type: Number, 
+            required: true
         }
 
     }, computed: {
+        classOutside(){
+            console.log(this.selected)
+            console.log(this.index)
+            let baseClass = "w-full h-full flex flex-col justify-center content-center hover:bg-neutral-300"
+            return this.selected === this.index ? baseClass + " bg-indigo-100" : baseClass
+        },
         email_from() {
             return this.Doc.From;
         },
@@ -63,13 +81,14 @@ export default {
             console.log("k", k)
             this.selectDocToRender(k);
             this.setEnableEmailViewer(true);
+            this.setSelected(this.index)
             event.preventDefault();
-        }
+        },
     }
 }
 </script>
 <template>
-    <div class="w-full h-full flex flex-col justify-center content-center hover:bg-neutral-300" @click="handleSelectDocument($event, this.Doc)">
+    <div :class="classOutside" @click="handleSelectDocument($event, this.Doc)">
         <div class="w-full flex flex-row justify-between">
             <span class="w-1/5 text-xs font-bold">{{ fromEmail }}</span>
             <span class="w-1/5 text-xs">{{ this.date_email }}</span> <!-- 8.33% -->

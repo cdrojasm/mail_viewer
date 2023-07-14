@@ -12,7 +12,6 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"runtime/pprof"
 	"strings"
 	"time"
 )
@@ -40,15 +39,8 @@ type doc_content struct {
 
 func main() {
 
-	f, err := os.Create("cpu_profile.prof")
-	if err != nil {
-		log.Fatal(err)
-	}
-	pprof.StartCPUProfile(f)
-	defer pprof.StopCPUProfile()
-
 	urlSearchZinc := "http://localhost:4080/api/enron_mail__/_doc"
-	fileList := "./listOfDocuments_test.csv"
+	fileList := "./listOfDocuments.csv"
 	var currentNameFile string
 
 	readFile, err := os.Open(fileList)
@@ -73,6 +65,7 @@ func main() {
 		} else {
 			stringLoadedDataFile := loadStringDataFile(currentNameFile)
 			docContent := processingDoc(stringLoadedDataFile)
+			fmt.Println(docContent.Content)
 			jsonDataBin, err := json.Marshal(docContent)
 			if err != nil {
 				panic(err)
@@ -132,6 +125,8 @@ func processingDoc(data string) doc_content {
 						case "Date":
 							contentTagData = strings.TrimSpace(strings.Split(strings.Split(contentTagData, ",")[1], "(")[0])
 							t, err := time.Parse(inputLayout, contentTagData)
+							fmt.Println(contentTagData)
+
 							if err != nil {
 								fmt.Println("Error parsing date:", err)
 								//contentCurrentDocument.Date = ""
@@ -178,6 +173,8 @@ func processingDoc(data string) doc_content {
 				}
 			}
 
+		} else {
+			/* fmt.Println("!!!!!!no fue encontrado el tag:", currentTag, "en el archivo") */
 		}
 		tagIndex += 1
 	}

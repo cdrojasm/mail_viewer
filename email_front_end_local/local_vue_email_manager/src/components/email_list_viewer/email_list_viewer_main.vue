@@ -1,6 +1,8 @@
 <script>
 import Email_viewer from './Email_viewer.vue'
 import Email_list from './Email_list.vue'
+import Email_viewer_fallback from './Email_viewer_fallback.vue'
+import { computed } from 'vue';
 
 export default {
     props: {
@@ -39,11 +41,20 @@ export default {
         totalCount: {
             type: Number,
             required: true
+        },
+        selected:{
+            type:Number, 
+            required: true
+        },
+        setSelected:{
+            type: Function, 
+            required: true
         }
     },
     components: {
         Email_list,
         Email_viewer,
+        Email_viewer_fallback
     }, watch: {
         queryResults(newQueryResults, oldQueryResults) {
             if (newQueryResults.value.hasOwnProperty("length") && newQueryResults.value.length > 0) {
@@ -56,6 +67,7 @@ export default {
         return {
             amountDocuments: 0,
             enableEmailViewer: false,
+            enableEmailViewer_non_docs: true,
             selectedDocumentToRender: {
                 "Content": "",
                 "Date": "",
@@ -70,12 +82,32 @@ export default {
         },
         setEnableEmailViewer(newState) {
             this.enableEmailViewer = newState
+            this.enableEmailViewer_non_docs = !newState
+        }
+    }, computed:{
+        showFallback(){
+            console.log(this.queryResults)
+            if(this.queryResults.length === 0){
+                return true
+            }
+            if(this.enableEmailViewer === false){
+                return true
+            }
+        },
+        display_mail_viewer(){
+            console.log(this.queryResults)
+            if(this.queryResults.length === 0){
+                return false
+            }
+            if(this.enableEmailViewer === true){
+                return true
+            }
         }
     }
 }
 </script>
 <template>
-    <div id="container_Email_list_viewer" class="w-full flex flex-row pt-6">
+    <div id="container_Email_list_viewer" class="w-full flex flex-row pt-6 gap-4">
         <Email_list 
             :queryResults="queryResults" 
             :selectDocToRender="selectDocToRender"
@@ -86,8 +118,12 @@ export default {
             :setCurrentAmountDocsPerPage="setCurrentAmountDocsPerPage" 
             :totalCount="totalCount"
             :enableSearch="enableSearch"
-            :handleEnableSearch="handleEnableSearch" />
-        <Email_viewer class="flex flex-col" v-if="enableEmailViewer" :selectedDocumentToRender="selectedDocumentToRender"
+            :handleEnableSearch="handleEnableSearch"
+            :selected="selected"
+            :setSelected="setSelected"
+            />
+        <Email_viewer class="flex flex-col" v-if="display_mail_viewer" :selectedDocumentToRender="selectedDocumentToRender"
             :setEnableEmailViewer="setEnableEmailViewer" />
+        <Email_viewer_fallback class="flex flex-col" v-if="showFallback" :queryResults="queryResults"/>
     </div>
 </template>

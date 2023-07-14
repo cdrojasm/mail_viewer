@@ -10,6 +10,7 @@ const enableSearch = ref(false);
 const currentOffSet = ref(0);
 const amountDocsPerPage = ref(20);
 const totalCount = ref(0);
+const selected = ref(-1)
 let shouldWatch = true;
 
 function setQueryMatch(newQueryMatch) {
@@ -26,6 +27,11 @@ function setCurrentOffSet(newPage) {
 
 function setCurrentAmountDocsPerPage(newAmountDocs) {
   amountDocsPerPage.value = parseInt(newAmountDocs);
+}
+
+function setSelected(newIndexDoc) {
+  console.log("newSelected", newIndexDoc)
+  selected.value = parseInt(newIndexDoc);
 }
 
 watch(enableSearch, (newValue, oldValue) => {
@@ -45,6 +51,8 @@ watch(enableSearch, (newValue, oldValue) => {
           queryResults.value.push(document_i)
         })
         totalCount.value = data.count;
+      }else{
+        totalCount.value = 0
       }
 
     })
@@ -65,7 +73,7 @@ onMounted(() => {
 
 </script>
 <template>
-  <header class="w-full max-h-44">
+  <header class="w-5/6 max-h-44 shadow-inner shadow-xl bg-white	pt-3.5 rounded-b-lg">
     <Header_mail />
     <Search_bar 
       :queryMatch="queryMatch" 
@@ -86,8 +94,13 @@ onMounted(() => {
       :setCurrentOffSet="setCurrentOffSet"
       :amountDocsPerPage="amountDocsPerPage" 
       :setCurrentAmountDocsPerPage="setCurrentAmountDocsPerPage" 
-      :totalCount="totalCount"/>
+      :totalCount="totalCount"
+      :selected="selected"
+      :setSelected="setSelected"
+      />
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
