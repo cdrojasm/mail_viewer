@@ -1,7 +1,7 @@
 <script setup>
 import Header_mail from './components/header/Header_mail.vue';
 import Search_bar from './components/header/Search_bar.vue';
-import Email_list_viewer_main from './components/email_list_viewer/email_list_viewer_main.vue';
+import Email_list_viewer_main from './components/email_list_viewer/Email_list_viewer_main.vue';
 import { ref, watch, onMounted, watchEffect } from "vue"
 
 const queryMatch = ref("");
@@ -30,12 +30,10 @@ function setCurrentAmountDocsPerPage(newAmountDocs) {
 }
 
 function setSelected(newIndexDoc) {
-  console.log("newSelected", newIndexDoc)
   selected.value = parseInt(newIndexDoc);
 }
 
 watch(enableSearch, (newValue, oldValue) => {
-  console.log("consultando data")
   fetch(`http://localhost:7000/documents/?documentID=${queryMatch.value}&page=${currentOffSet.value}&amountDocs=${amountDocsPerPage.value}`, {
     method: "GET",
     headers: {

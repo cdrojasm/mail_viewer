@@ -19,10 +19,9 @@ services:
   app:
     build:
       context: ./email_front_end
-    image:  "email_app_vue_js"
     volumes:
-      - "/c/Users/crojas/Desktop/proyectos/tTest/email_front_end:/app"
+      - "/c/Users/crojas/Desktop/proyectos/tTest/email_front_end/app:/app"
     ports:
-      - "5010:8080"
+      - "5010:80"
     
     

@@ -28,8 +28,6 @@ export default {
 
     }, computed: {
         classOutside(){
-            console.log(this.selected)
-            console.log(this.index)
             let baseClass = "w-full h-full flex flex-col justify-center content-center hover:bg-neutral-300"
             return this.selected === this.index ? baseClass + " bg-indigo-100" : baseClass
         },
@@ -78,7 +76,6 @@ export default {
                     documentObject[x] = null
                 }
             })
-            console.log("k", k)
             this.selectDocToRender(k);
             this.setEnableEmailViewer(true);
             this.setSelected(this.index)

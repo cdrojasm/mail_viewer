@@ -2,7 +2,6 @@
 import Email_viewer from './Email_viewer.vue'
 import Email_list from './Email_list.vue'
 import Email_viewer_fallback from './Email_viewer_fallback.vue'
-import { computed } from 'vue';
 
 export default {
     props: {
@@ -60,8 +59,6 @@ export default {
             if (newQueryResults.value.hasOwnProperty("length") && newQueryResults.value.length > 0) {
                 this.amountDocuments = newQueryResults.value.length;
             }
-            console.log("amount documents")
-            console.log(newQueryResults.value.length)
         }
     }, data() {
         return {
@@ -86,7 +83,6 @@ export default {
         }
     }, computed:{
         showFallback(){
-            console.log(this.queryResults)
             if(this.queryResults.length === 0){
                 return true
             }
@@ -95,7 +91,6 @@ export default {
             }
         },
         display_mail_viewer(){
-            console.log(this.queryResults)
             if(this.queryResults.length === 0){
                 return false
             }
