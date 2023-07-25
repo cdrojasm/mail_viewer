@@ -28,9 +28,15 @@ Document content extraction is realized at same time that extracted content from
 The first implementation of the indexation function take near of 5 minutes to complete the task. 
 Each function was analyzed trhough profiling pprof and then it was checked each part of code that requires enhance. Above images present results of loadStringDataFile, processingDoc and indexingDataToSearchZinc functions. 
 
+![Alt text](docs_imgs/image.png)
+
+![Alt text](docs_imgs/image-1.png)
+
+![Alt text](docs_imgs/image-2.png)
+
 ### Enhancements plan
 With the aim to remove signiticant bottle necks, follow changes in indexer script functions are proposed.
-- Enhance file reading functions, it was possible to implement a line by line reading funciton that could be improve this section.
+- Enhance file reading functions, it was possible to implement a line by line reading funciton that could be improve the performance.
 - Delete all fmt.Println, this output to console spend a lot of time in the three functions, single calls could spend near of 50% of time spend.
 - Generate precompiled regular expressions to extract content from document files. Trim functions could spend a large amount of resources against regex. 
 - Avoid compile regex for each iteration cycle. 
